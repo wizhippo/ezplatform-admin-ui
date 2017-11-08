@@ -395,4 +395,56 @@ class LocationController extends Controller
             'locationId' => $contentInfo->mainLocationId,
         ]));
     }
+
+    /**
+     * Handles update existing location.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function updateAction(Request $request): Response
+    {
+        $form = $this->formFactory->updateLocation(
+            new ContentLocationUpdateData()
+        );
+        $form->handleRequest($request);
+
+        $location = $form->getData()->getLocation();
+
+//        $contentInfo = $form->getData()->getContentInfo();
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ContentLocationUpdateData $data) {
+                $location = $data->getLocation();
+
+                foreach ($data->getNewLocations() as $newLocation) {
+                    $locationCreateStruct = $this->locationService->newLocationCreateStruct($newLocation->id);
+                    $this->locationService->createLocation($contentInfo, $locationCreateStruct);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                        /** @Desc("Location '%name%' created.") */
+                            'location.create.success',
+                            ['%name%' => $newLocation->getContentInfo()->name],
+                            'location'
+                        )
+                    );
+                }
+
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                    'locationId' => $contentInfo->mainLocationId,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $contentInfo->mainLocationId,
+        ]));
+    }
+
 }
