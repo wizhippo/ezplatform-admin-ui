@@ -26,14 +26,12 @@ class LocationUpdateData
 
     /**
      * @param Location|null $location
-     * @param string|null $sortField
-     * @param string|null $sortOrder
      */
-    public function __construct(?Location $location = null, string $sortField = null, string $sortOrder = null)
+    public function __construct(?Location $location = null)
     {
         $this->location = $location;
-        $this->sortField = $sortField;
-        $this->sortOrder = $sortOrder;
+        $this->sortField = $location->sortField ?? null;
+        $this->sortOrder = $location->sortOrder ?? null;
     }
 
     /**
@@ -67,7 +65,7 @@ class LocationUpdateData
     /**
      * @return null|string
      */
-    public function getSortField()
+    public function getSortField(): ?string
     {
         return $this->sortField;
     }
@@ -80,15 +78,15 @@ class LocationUpdateData
     public function setSortOrder($sortOrder): LocationUpdateData
     {
         $this->sortOrder = $sortOrder;
+
         return $this;
     }
 
     /**
      * @return null|string
      */
-    public function getSortOrder()
+    public function getSortOrder(): ?string
     {
         return $this->sortOrder;
     }
-
 }
