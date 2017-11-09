@@ -33,7 +33,7 @@ class SortFieldChoiceType extends AbstractType
         $resolver->setDefaults([
             'choices' => $this->getSortFieldChoices(),
             'choices_as_values' => true,
-            'translation_domain' => 'ezrepoforms_content_type'
+            'translation_domain' => 'ezrepoforms_content_type',
         ]);
     }
 
