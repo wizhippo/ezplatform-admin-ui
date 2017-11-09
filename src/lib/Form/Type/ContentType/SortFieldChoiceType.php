@@ -33,6 +33,7 @@ class SortFieldChoiceType extends AbstractType
         $resolver->setDefaults([
             'choices' => $this->getSortFieldChoices(),
             'choices_as_values' => true,
+            'translation_domain' => 'ezrepoforms_content_type'
         ]);
     }
 
@@ -52,7 +53,7 @@ class SortFieldChoiceType extends AbstractType
     {
         $choices = [];
         foreach ($this->getSortFieldValues() as $sortField) {
-            $choices[$this->getSortFieldLabel($sortField)] = $sortField;
+            $choices[$this->getSortFieldLabel((string)$sortField)] = $sortField;
         }
 
         return $choices;
@@ -67,7 +68,7 @@ class SortFieldChoiceType extends AbstractType
      *
      * @throws InvalidArgumentException
      */
-    private function getSortFieldLabel($sortField): string
+    private function getSortFieldLabel(string $sortField): string
     {
         return $this->translator->trans(/** @Ignore */'content_type.sort_field.' . $sortField, [], 'ezrepoforms_content_type');
     }
