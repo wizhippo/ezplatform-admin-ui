@@ -51,6 +51,7 @@ AlloyEditor.Buttons[EzBtnImageUpdate.key] = AlloyEditor.EzBtnImageUpdate = EzBtn
 EzBtnImageUpdate.defaultProps = {
     udwTitle: 'Select an image to embed',
     udwContentDiscoveredMethod: 'updateImage',
+    udwConfigName: 'richtext_embed_image',
     label: 'Select antoher image item',
     udwIsSelectableMethod: 'isImage',
 };

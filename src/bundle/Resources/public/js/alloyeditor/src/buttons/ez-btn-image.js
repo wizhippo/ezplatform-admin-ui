@@ -66,6 +66,7 @@ EzBtnImage.defaultProps = {
     modifiesSelection: true,
     udwTitle: 'Select an image to embed',
     udwContentDiscoveredMethod: 'addImage',
+    udwConfigName: 'richtext_embed_image',
     udwIsSelectableMethod: 'isImage',
     udwLoadContent: true,
 };
