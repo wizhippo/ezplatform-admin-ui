@@ -45,6 +45,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
     {
         $this->prependViews($container);
         $this->prependImageVariations($container);
+        $this->prependUniversalDiscoveryWidget($container);
     }
 
     /**
@@ -64,6 +65,17 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
     private function prependImageVariations(ContainerBuilder $container)
     {
         $imageConfigFile = __DIR__ . '/../Resources/config/image_variations.yml';
+        $config = Yaml::parse(file_get_contents($imageConfigFile));
+        $container->prependExtensionConfig('ezpublish', $config);
+        $container->addResource(new FileResource($imageConfigFile));
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function prependUniversalDiscoveryWidget(ContainerBuilder $container)
+    {
+        $imageConfigFile = __DIR__ . '/../Resources/config/universal_discovery_widget.yml';
         $config = Yaml::parse(file_get_contents($imageConfigFile));
         $container->prependExtensionConfig('ezpublish', $config);
         $container->addResource(new FileResource($imageConfigFile));

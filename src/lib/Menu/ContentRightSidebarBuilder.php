@@ -14,6 +14,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
+use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -45,25 +46,31 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var UserService */
     private $userService;
 
+    /** @var UniversalDiscoveryExtension */
+    private $udwExtension;
+
     /**
      * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
      * @param PermissionResolver $permissionResolver
      * @param ConfigResolverInterface $configResolver
      * @param UserService $userService
+     * @param UniversalDiscoveryExtension $udwExtension
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
         ConfigResolverInterface $configResolver,
-        UserService $userService
+        UserService $userService,
+        UniversalDiscoveryExtension $udwExtension
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
         $this->userService = $userService;
+        $this->udwExtension = $udwExtension;
     }
 
     /**
@@ -155,6 +162,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'extras' => ['icon' => 'move'],
                     'attributes' => [
                         'class' => 'btn--udw-move',
+                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                         'data-root-location' => $this->configResolver->getParameter(
                             'universal_discovery_widget_module.default_location_id'
                         ),
@@ -167,6 +175,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'extras' => ['icon' => 'copy'],
                     'attributes' => [
                         'class' => 'btn--udw-copy',
+                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                         'data-root-location' => $this->configResolver->getParameter(
                             'universal_discovery_widget_module.default_location_id'
                         ),

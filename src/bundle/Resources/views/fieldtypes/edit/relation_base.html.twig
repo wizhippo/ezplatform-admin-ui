@@ -55,7 +55,13 @@
             {{ 'ezobjectrelationlist.cta.limit'|trans({'%limit%': limit})|desc('Set up multiple relations with up to %limit% content items') }}
         {% endif %}
         </p>
-        <button class="ez-relations__cta-btn btn btn-primary">
+        <button
+                {% if limit == 1 %}
+                    data-udw-config="{{ ez_udw_config('single', {}) }}"
+                {% else %}
+                    data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                {% endif %}
+                class="ez-relations__cta-btn btn btn-primary">
             <svg class="ez-icon">
                 <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#relations"></use>
             </svg>

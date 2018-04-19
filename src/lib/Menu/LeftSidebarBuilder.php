@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -24,6 +25,9 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     /** @var ConfigResolverInterface */
     private $configResolver;
 
+    /** @var UniversalDiscoveryExtension */
+    private $udwExtension;
+
     /* Menu items */
     const ITEM__SEARCH = 'sidebar_left__search';
     const ITEM__BROWSE = 'sidebar_left__browse';
@@ -33,15 +37,18 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
      * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
      * @param ConfigResolverInterface $configResolver
+     * @param UniversalDiscoveryExtension $udwExtension
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        UniversalDiscoveryExtension $udwExtension
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->configResolver = $configResolver;
+        $this->udwExtension = $udwExtension;
     }
 
     /**
@@ -77,6 +84,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'extras' => ['icon' => 'browse'],
                     'attributes' => [
                         'class' => 'btn--udw-browse',
+                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single'),
                         'data-starting-location-id' => $this->configResolver->getParameter(
                             'universal_discovery_widget_module.default_location_id'
                         ),
