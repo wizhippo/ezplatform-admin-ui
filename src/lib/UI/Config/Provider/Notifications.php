@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
-use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
@@ -25,7 +24,8 @@ class Notifications implements ProviderInterface
     /**
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      */
-    public function __construct(ConfigResolverInterface $configResolver) {
+    public function __construct(ConfigResolverInterface $configResolver)
+    {
         $this->configResolver = $configResolver;
     }
 
