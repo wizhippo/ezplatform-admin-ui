@@ -28,16 +28,21 @@
         }
     }
 
-    [data-ezalign='right'] {
-        float: right;
-    }
+    .cke_widget_wrapper {
+        width: 100%;
+        display: flex;
 
-    [data-ezalign='left'] {
-        float: left;
-    }
+        &[data-ezalign='right'] {
+            justify-content: flex-end
+        }
 
-    [data-ezalign='center'] {
-        text-align: center;
+        &[data-ezalign='left'] {
+            justify-content: flex-start;
+        }
+
+        &[data-ezalign='center'] {
+            justify-content: center;
+        }
     }
 
     [data-ezelement='ezconfig'] {
