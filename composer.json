@@ -21,7 +21,7 @@
         "ezsystems/ezpublish-kernel": "^8.0@dev",
         "ezsystems/repository-forms": "^3.0@dev",
         "ezsystems/ezplatform-admin-ui-modules": "^2.0@dev",
-        "ezsystems/ez-support-tools": "^2.0@dev",
+        "ezsystems/ez-support-tools": "dev-EZP-28032-extract-rest as 2.0@dev",
         "ezsystems/ezplatform-design-engine": "^3.0@dev",
         "ezsystems/ezplatform-user": "^2.0@dev",
         "ezsystems/ezplatform-richtext": "^2.0@dev",
@@ -40,7 +40,7 @@
         "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
     },
     "extra": {
-        "_ezplatform_branch_for_behat_tests": "master",
+        "_ezplatform_branch_for_behat_tests": "EZP-28032-rest-common",
         "branch-alias": {
             "dev-tmp_ci_branch": "2.0.x-dev",
             "dev-master": "2.0.x-dev"
