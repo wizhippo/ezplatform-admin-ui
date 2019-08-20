@@ -30,6 +30,7 @@
         "symfony/asset": "^4.3",
         "symfony/yaml": "^4.3",
         "jms/translation-bundle": "^1.4",
+        "ezsystems/doctrine-dbal-schema": "^1.0@dev",
         "ezsystems/ezpublish-kernel": "^8.0@dev",
         "ezsystems/repository-forms": "^3.0@dev",
         "ezsystems/ezplatform-admin-ui-modules": "^2.0@dev",
