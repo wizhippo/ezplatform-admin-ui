@@ -139,4 +139,13 @@ class NavigationContext extends BusinessContext
             $contentItemPage->verifyIsLoaded();
         }
     }
+
+    /**
+     * @Given I am on subdomain :name
+     */
+    public function iAmOnSubdomain($name)
+    {
+        $url = 'http://'.$name;
+        $this->setMinkParameter('base_url', $url);
+    }
 }
