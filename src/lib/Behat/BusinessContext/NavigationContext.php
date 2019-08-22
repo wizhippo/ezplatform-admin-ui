@@ -145,7 +145,7 @@ class NavigationContext extends BusinessContext
      */
     public function iAmOnSubdomain($name)
     {
-        $url = 'http://'.$name;
-        $this->setMinkParameter('base_url', $url);
+        $url = 'http://' . $name;
+        $this->browserContext->setMinkParameter('base_url', $url);
     }
 }
